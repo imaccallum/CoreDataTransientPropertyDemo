@@ -12,20 +12,10 @@ import CoreData
 class Number: NSManagedObject {
 
     @NSManaged var number: NSNumber
-    var primitiveSection: String?
     
     dynamic var section: String? {
-        willAccessValueForKey("section")
-        var temp = primitiveSection
-        didAccessValueForKey("section")
-        
-        if temp == nil {
-            temp = number.intValue >= 60 ? "Pass" : "Fail"
-            primitiveSection = temp
-        }
-        
-        return temp
+        println("SECTION")
+        return number.intValue >= 60 ? "Pass" : "Fail"
+
     }
-    
-    
 }

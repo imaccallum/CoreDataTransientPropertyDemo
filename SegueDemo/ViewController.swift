@@ -19,7 +19,7 @@ class HomeViewController: UITableViewController, NSFetchedResultsControllerDeleg
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        fetchedResultsController = NSFetchedResultsController(fetchRequest: fetchRequest(), managedObjectContext: managedObjectContext!, sectionNameKeyPath: "section", cacheName: "Root")
+        fetchedResultsController = NSFetchedResultsController(fetchRequest: fetchRequest(), managedObjectContext: managedObjectContext!, sectionNameKeyPath: "section", cacheName: nil)
         fetchedResultsController?.delegate = self
         fetchedResultsController?.performFetch(nil)
         
@@ -29,11 +29,10 @@ class HomeViewController: UITableViewController, NSFetchedResultsControllerDeleg
     func fetchRequest() -> NSFetchRequest {
         
         var fetchRequest = NSFetchRequest(entityName: "Number")
-//        let sortDescriptor = NSSortDescriptor(key: "section", ascending: false)
-        let sortDescriptor1 = NSSortDescriptor(key: "number", ascending: false)
+        let sortDescriptor = NSSortDescriptor(key: "number", ascending: false)
         
         fetchRequest.predicate = nil
-        fetchRequest.sortDescriptors = [sortDescriptor1]
+        fetchRequest.sortDescriptors = [sortDescriptor]
         fetchRequest.fetchBatchSize = 20
         
         return fetchRequest
@@ -140,7 +139,10 @@ class HomeViewController: UITableViewController, NSFetchedResultsControllerDeleg
         
         newNumber.number = NSNumber(unsignedInt: arc4random_uniform(100))
         
-        managedObjectContext?.save(nil)
+        var error: NSError?
+        managedObjectContext?.save(&error)
+        println(error)
+        
     }
     
     
