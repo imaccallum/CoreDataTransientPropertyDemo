@@ -15,7 +15,13 @@ class Number: NSManagedObject {
     
     dynamic var section: String? {
         println("SECTION")
-        return number.intValue >= 60 ? "Pass" : "Fail"
-
+        switch number.intValue {
+        case 0..<60: return "F"
+        case 60..<70: return "D"
+        case 70..<80: return "C"
+        case 80..<90: return "B"
+        case 90..<100: return "A"
+        default: return "N/A"
+        }
     }
 }
