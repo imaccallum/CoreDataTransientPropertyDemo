@@ -141,7 +141,6 @@ class HomeViewController: UITableViewController, NSFetchedResultsControllerDeleg
         
         var error: NSError?
         managedObjectContext?.save(&error)
-        println(error)
         
     }
     

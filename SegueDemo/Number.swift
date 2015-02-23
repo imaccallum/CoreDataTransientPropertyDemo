@@ -13,7 +13,7 @@ class Number: NSManagedObject {
 
     @NSManaged var number: NSNumber
     
-    dynamic var section: String? {
+    var section: String? {
         println("SECTION")
         switch number.intValue {
         case 0..<60: return "F"
